@@ -13,18 +13,10 @@ sites = []
 flag = 0
 
 
-def resource_path(relative_path):
-    """ pour la compatibilité de fichiers PyInstaller """
-    try:
-        base_path = sys._MEIPASS
-    except Exception:
-        base_path = os.path.abspath(".")
-
-    return os.path.join(base_path, relative_path)
     
 
   
-with open(resource_path('liste/disney.csv'), newline='') as csvfile:
+with open('./liste/disney.csv', 'r') as csvfile:
 	spamreader = csv.reader(csvfile, delimiter=',')
 	for row in spamreader:				#ON IMPORTE LES DONNEES DANS DES LISTES	
 		films.append(row[1])
@@ -74,7 +66,7 @@ if sites[films.index(tire)] != 'AUCUN LIEN': #SI PAS DISPONIBLE SUR DISNEY+ : ON
 
 
 #ON MET EN PLACE L'AFFICHE DU FILM
-photo = Image.open(resource_path("affiches/"+str(films.index(tire)+1)+".png"))
+photo = Image.open("./aff/"+str(films.index(tire)+1)+".png")
 resized = photo.resize((310,420))
 new_photo = ImageTk.PhotoImage(resized)
 label = Label(x,image=new_photo)
